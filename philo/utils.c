@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:44:31 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 11:30:50 by ammah            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:10:09 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	print_action(int action, int i, t_philo *philo, long long time_death)
 		}
 		pthread_mutex_unlock(&philo->print);
 		return (1);
+		
 	}
 	else if (action == 5)
 		printf("%lld %d died\n", time_death - philo->start_time, i + 1);

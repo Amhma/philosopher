@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:26:54 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 11:33:36 by ammah            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:26:18 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		*routine(void *arg);
 int			check_is_dead(t_philo *philo);
 long long	ft_get_time(void);
 void		ft_usleep(long long time);
-void		check_dead_fork(t_thread *th, pthread_mutex_t *mutex1,
+void		check_dead_fork(pthread_mutex_t *mutex1,
 				pthread_mutex_t *mutex2);
 int			thinking(t_thread *th, int i);
 

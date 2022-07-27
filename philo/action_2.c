@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 11:32:52 by ammah            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:26:19 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,38 +40,23 @@ void	ft_usleep(long long time)
 
 	start_time = ft_get_time();
 	while (ft_get_time() - start_time < time)
-		usleep(50);
+		usleep(5);
 }
 
-void	check_dead_fork(t_thread *th, pthread_mutex_t *mutex1,
+void	check_dead_fork(pthread_mutex_t *mutex1,
 	pthread_mutex_t *mutex2)
 {
-	(void)th;
-/*	int	res;
-
-
-	res = 0;
-	pthread_mutex_lock(&th->dead);
-	if (th->is_one_dead == TRUE)
-	{*/
-		if (mutex1)
-			pthread_mutex_unlock(mutex1);
-		if (mutex2)
-			pthread_mutex_unlock(mutex2);
-//		res = 1;
-//	}
-//	pthread_mutex_unlock(&th->dead);
-//	return (res);
+	if (mutex1)
+		pthread_mutex_unlock(mutex1);
+	if (mutex2)
+		pthread_mutex_unlock(mutex2);
 }
 
 int	thinking(t_thread *th, int i)
 {
-//	if (check_dead_fork(th, NULL, NULL))
-//		return (1);
-	if (print_action(4, i, th, 0))
+	if (print_action(4, i, th->philo, 0))
 		return (1);
-//	printf("%lld %d is thinking\n", ft_get_time() - th->start_time, i + 1);
-	if (th->nb_of_philo % 2)
+	if (th->philo->nb_of_philo % 2)
 		ft_usleep(1);
 	return (0);
 }	

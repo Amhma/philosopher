@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 11:38:47 by ammah            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:26:17 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ long long	check_last_eat(t_thread *th, t_philo *philo, int i, long long death_ti
 	res = 0;
 	pthread_mutex_lock(&th[i].last_time_eat);
 	if (!th[i].last_eat)
-		res = death_time - philo->start_time;
-	else
-		res = death_time - th[i].last_eat;
+		th[i].last_eat = philo->start_time;
+	res = death_time - th[i].last_eat;
 	pthread_mutex_unlock(&th[i].last_time_eat);
 	if (res <= (long long)philo->die_time)
 		return (0);
@@ -52,8 +51,8 @@ int	init_mutex(t_thread *th, t_philo *philo)
 		}
 		i++;
 	}
-	pthread_mutex_unlock(&philo->process);
 	philo->start_time = ft_get_time();
+	pthread_mutex_unlock(&philo->process);
 	return (0);
 }
 
@@ -99,7 +98,6 @@ int	philo_process(t_thread *th, t_philo *philo)
 			pthread_mutex_unlock(&philo->dead);
 			if (philo->times == -1 || !check_stroke(th, i))
 				print_action(5, i, philo, time_death);
-//				printf("%lld %d died\n", time_death - th->start_time, i + 1);
 			break ;
 		}
 		if (i++ == philo->nb_of_philo - 1)
@@ -133,7 +131,7 @@ int	main(int ac, char **av)
 		th[i].philo = &philo;
 		th[i].current_philo = i;
 		th[i].stroke = philo.times;
-		th[i].last_eat = 0;
+		th[i++].last_eat = 0;
 	}
 	if (philo_process(th, &philo))
 		res = 1;
