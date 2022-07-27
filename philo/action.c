@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 15:26:20 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:49:47 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,18 @@ int	even_fork(t_philo *philo, int i)
 		return (1);
 	}
 	if (i == 0)
-	{
 		pthread_mutex_lock(philo->fork + philo->nb_of_philo - 1);
-		if (print_action(1, i, philo, 0))
-		{
-			check_dead_fork(philo->fork + i, philo->fork + philo->nb_of_philo - 1);
-			return (1);
-		}
-	}
 	else
-	{
 		pthread_mutex_lock(philo->fork + i - 1);
-		if (print_action(1, i, philo, 0))
-		{
+	if (print_action(1, i, philo, 0))
+	{
+		if (i == 0)
+			check_dead_fork(philo->fork + i,
+				philo->fork + philo->nb_of_philo - 1);
+		else
 			check_dead_fork(philo->fork + i, philo->fork + i - 1);
-			return (1);
-		}
-	}	
+		return (1);
+	}
 	return (0);
 }
 
@@ -113,16 +108,15 @@ void	*routine(void *arg)
 
 	th = (t_thread *)arg;
 	i = th->current_philo;
-//	pthread_mutex_lock(&th->philo->process);
-//	pthread_mutex_unlock(&th->philo->process);
-	if (i % 2)
-		ft_usleep(th->philo->eat_time);
 	while (!check_is_dead(th->philo))
 	{
 		if (eating(th, th->philo, i))
 			return (arg);
 		if (sleepling(th, th->philo, i))
+		{
+			pthread_mutex_unlock(&th->last_time_eat);
 			return (arg);
+		}
 		if (thinking(th, i))
 			return (arg);
 	}

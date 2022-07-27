@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 13:02:21 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 11:04:59 by ammah            ###   ########.fr       */
+/*   Updated: 2022/07/27 19:40:28 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	parse_philo(char **av, int ac, t_philo *philo)
 	}
 	else
 		philo->times = -1;
-	if (philo->nb_of_philo == -1 || philo->die_time == -1 || philo->eat_time == -1
-		|| philo->sleep_time == -1)
+	if (philo->nb_of_philo == -1 || philo->die_time == -1
+		|| philo->eat_time == -1 || philo->sleep_time == -1)
 		return (1);
 	philo->is_one_dead = FALSE;
 	return (0);

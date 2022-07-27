@@ -6,13 +6,14 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 15:26:17 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:43:34 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long	check_last_eat(t_thread *th, t_philo *philo, int i, long long death_time)
+long long	check_last_eat(t_thread *th, t_philo *philo, int i,
+	long long death_time)
 {
 	long long	res;
 
@@ -42,16 +43,8 @@ int	init_mutex(t_thread *th, t_philo *philo)
 	}
 	i = 0;
 	pthread_mutex_lock(&philo->process);
-	while (i < philo->nb_of_philo)
-	{
-		if (pthread_create(&th[i].thread, NULL, &routine, th + i))
-		{
-			pthread_mutex_unlock(&philo->process);
-			return (1);
-		}
-		i++;
-	}
-	philo->start_time = ft_get_time();
+	if (start_philo(th, philo))
+		return (1);
 	pthread_mutex_unlock(&philo->process);
 	return (0);
 }
@@ -66,7 +59,7 @@ int	destroy_mutex(t_thread *th, t_philo *philo)
 	while (i < philo->nb_of_philo)
 	{
 		if (pthread_join(th[i++].thread, NULL))
-			res = 1;;
+			res = 1;
 	}
 	i = 0;
 	while (i < philo->nb_of_philo)
@@ -101,10 +94,7 @@ int	philo_process(t_thread *th, t_philo *philo)
 			break ;
 		}
 		if (i++ == philo->nb_of_philo - 1)
-		{
-			usleep(50);
-			i = 0;
-		}
+			i = process_monitor();
 	}
 	if (destroy_mutex(th, th->philo))
 		return (1);

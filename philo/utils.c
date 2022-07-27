@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:44:31 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 15:10:09 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:56:37 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,23 @@ int	print_action(int action, int i, t_philo *philo, long long time_death)
 		if (!check_is_dead(philo))
 		{
 			if (action == 1)
-				printf("%lld %d has taken a fork\n", ft_get_time() - philo->start_time, i + 1);
+				ft_write("has taken a fork\n",
+					ft_get_time() - philo->start_time, i + 1);
 			else if (action == 2)
-				printf("%lld %d is eating\n", ft_get_time() - philo->start_time, i + 1);
+				ft_write("is eating\n",
+					ft_get_time() - philo->start_time, i + 1);
 			else if (action == 3)
-				printf("%lld %d is sleeping\n", ft_get_time() - philo->start_time, i + 1);
+				ft_write("is sleeping\n",
+					ft_get_time() - philo->start_time, i + 1);
 			else if (action == 4)
-				printf("%lld %d is thinking\n", ft_get_time() - philo->start_time, i + 1);
+				ft_write("is thinking\n",
+					ft_get_time() - philo->start_time, i + 1);
 			pthread_mutex_unlock(&philo->print);
 			return (0);
 		}
-		pthread_mutex_unlock(&philo->print);
-		return (1);
-		
 	}
 	else if (action == 5)
-		printf("%lld %d died\n", time_death - philo->start_time, i + 1);
+		ft_write("died\n", time_death - philo->start_time, i + 1);
 	pthread_mutex_unlock(&philo->print);
-	return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 15:26:19 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:12:10 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_usleep(long long time)
 
 	start_time = ft_get_time();
 	while (ft_get_time() - start_time < time)
-		usleep(5);
+		usleep(50);
 }
 
 void	check_dead_fork(pthread_mutex_t *mutex1,
@@ -59,4 +59,4 @@ int	thinking(t_thread *th, int i)
 	if (th->philo->nb_of_philo % 2)
 		ft_usleep(1);
 	return (0);
-}	
+}

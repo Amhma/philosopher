@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:26:54 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 15:26:18 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/27 19:50:06 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ typedef struct s_philo
 	long long		start_time;
 }				t_philo;
 
+//			philo.c
+int			start_philo(t_thread *th, t_philo *philo);
+int			process_monitor(void);
+
 //			parse.c
+int			ft_strlen(char *str);
 int			parse_philo(char **av, int ac, t_philo *philo);
 int			ft_allocation(t_thread **philo, pthread_mutex_t **fork,
 				int nb_of_philo);
@@ -77,6 +82,10 @@ int			thinking(t_thread *th, int i);
 
 //			utils.c
 int			check_stroke(t_thread *th, int i);
-int			print_action(int action, int i, t_philo *philo, long long time_death);
+int			print_action(int action, int i, t_philo *philo,
+				long long time_death);
+
+//			write.c
+void		ft_write(char *str, long long time, int i);
 
 #endif
