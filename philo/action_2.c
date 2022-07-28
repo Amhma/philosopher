@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/28 13:27:13 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 14:28:49 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	thinking(t_thread *th, int i)
 	if (print_action(4, i, th->philo, 0))
 		return (1);
 	if (th->philo->nb_of_philo % 2)
-		ft_usleep(1);
+		ft_usleep((th->philo->die_time - th->philo->eat_time
+				- th->philo->sleep_time) / 2);
 	return (0);
 }

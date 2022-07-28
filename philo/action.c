@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/28 13:27:15 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 14:32:48 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ int	sleepling(t_thread *th, t_philo *philo, int i)
 	if (th->stroke > 0)
 		th->stroke -= 1;
 	if (th->stroke == 0)
+	{
+		pthread_mutex_unlock(&th->last_time_eat);
 		return (1);
+	}
 	pthread_mutex_unlock(&th->last_time_eat);
 	if (print_action(3, i, philo, 0))
 		return (1);
-	ft_usleep(philo->sleep_time);
 	return (0);
 }
 
@@ -111,17 +113,15 @@ void	*routine(void *arg)
 	if (th->philo->nb_of_philo == 1)
 	{
 		is_one_philo(th, th->philo);
-		return (0);
+		return (arg);
 	}
 	while (!check_is_dead(th->philo))
 	{
 		if (eating(th, th->philo, i))
 			return (arg);
 		if (sleepling(th, th->philo, i))
-		{
-			pthread_mutex_unlock(&th->last_time_eat);
 			return (arg);
-		}
+		ft_usleep(th->philo->sleep_time);
 		if (thinking(th, i))
 			return (arg);
 	}

@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:26:54 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/28 12:50:43 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:56:03 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,6 @@ int			print_action(int action, int i, t_philo *philo,
 //			write.c
 void		ft_write(char *str, long long time, int i);
 
+//			check.c
+int			check_dead_true(t_thread *th);
 #endif
