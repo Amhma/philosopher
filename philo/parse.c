@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 13:02:21 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 19:40:28 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 12:09:36 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_atoi_format(char *str)
 	nb = 0;
 	while (str && *(str + i) == '0')
 		i++;
-	if (!str && !str[i] && ft_strlen(str + i) > 10)
+	if (!str || !str[i] || ft_strlen(str + i) > 10)
 		return (-1);
 	if (!(*(str + i) >= '1' && *(str + i) <= '9'))
 		return (-1);

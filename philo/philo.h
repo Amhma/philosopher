@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:26:54 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 19:50:06 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 12:50:43 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,19 @@ typedef struct s_philo
 	int				nb_of_philo;
 	int				is_one_dead;
 	long long		start_time;
+	long long		time_death;
 }				t_philo;
 
 //			philo.c
+long long	check_last_eat(t_thread *th, t_philo *philo, int i,
+				long long death_time);
+
+//			philo_2.c
 int			start_philo(t_thread *th, t_philo *philo);
 int			process_monitor(void);
+void		*routine_1(void *arg);
+void		*routine_2(void *arg);
+int			monitor(t_thread *th);
 
 //			parse.c
 int			ft_strlen(char *str);
@@ -78,6 +86,10 @@ long long	ft_get_time(void);
 void		ft_usleep(long long time);
 void		check_dead_fork(pthread_mutex_t *mutex1,
 				pthread_mutex_t *mutex2);
+
+//			action_3.c
+void		is_one_philo(t_thread *th, t_philo *philo);
+
 int			thinking(t_thread *th, int i);
 
 //			utils.c

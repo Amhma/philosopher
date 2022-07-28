@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 19:49:47 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:27:15 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int	eating(t_thread *th, t_philo *philo, int i)
 		if (odd_fork(philo, i))
 			return (1);
 	}
-	if (print_action(2, i, philo, 0))
-		return (1);
 	pthread_mutex_lock(&th->last_time_eat);
 	th->last_eat = ft_get_time();
 	pthread_mutex_unlock(&th->last_time_eat);
+	if (print_action(2, i, philo, 0))
+		return (1);
 	ft_usleep(philo->eat_time);
 	return (0);
 }
@@ -108,6 +108,11 @@ void	*routine(void *arg)
 
 	th = (t_thread *)arg;
 	i = th->current_philo;
+	if (th->philo->nb_of_philo == 1)
+	{
+		is_one_philo(th, th->philo);
+		return (0);
+	}
 	while (!check_is_dead(th->philo))
 	{
 		if (eating(th, th->philo, i))

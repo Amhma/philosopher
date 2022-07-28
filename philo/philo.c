@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:12:15 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/27 19:43:34 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/28 13:29:11 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,17 @@ int	destroy_mutex(t_thread *th, t_philo *philo)
 	return (res);
 }
 
-int	philo_process(t_thread *th, t_philo *philo)
+int	philo_process(t_thread *th/*, t_philo *philo*/)
 {
-	int			i;
-	long long	time_death;
+//	int			i;
+//	long long	time_death;
 
-	i = 0;
+//	i = 0;
 	if (init_mutex(th, th->philo))
 		return (1);
-	while (1)
+	if (monitor(th))
+		return (1);
+/*	while (1)
 	{
 		time_death = ft_get_time();
 		if (check_last_eat(th, philo, i, time_death))
@@ -95,7 +97,7 @@ int	philo_process(t_thread *th, t_philo *philo)
 		}
 		if (i++ == philo->nb_of_philo - 1)
 			i = process_monitor();
-	}
+	}*/
 	if (destroy_mutex(th, th->philo))
 		return (1);
 	return (0);
@@ -123,7 +125,7 @@ int	main(int ac, char **av)
 		th[i].stroke = philo.times;
 		th[i++].last_eat = 0;
 	}
-	if (philo_process(th, &philo))
+	if (philo_process(th/*, &philo*/))
 		res = 1;
 	free(philo.fork);
 	free(th);
