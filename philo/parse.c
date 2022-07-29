@@ -6,7 +6,7 @@
 /*   By: amahla <amahla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 13:02:21 by amahla            #+#    #+#             */
-/*   Updated: 2022/07/28 12:09:36 by amahla           ###   ########.fr       */
+/*   Updated: 2022/07/29 13:41:03 by amahla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	parse_philo(char **av, int ac, t_philo *philo)
 
 int	ft_allocation(t_thread **philo, pthread_mutex_t **fork, int nb_of_philo)
 {
-	*philo = malloc(nb_of_philo * sizeof(t_philo));
+	*philo = malloc(nb_of_philo * sizeof(t_thread));
 	if (!*philo)
 		return (1);
 	*fork = malloc(nb_of_philo * sizeof(pthread_mutex_t));
